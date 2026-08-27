@@ -1,0 +1,1 @@
+name,os,host,mgmt_port,username,password,use_sudo,pem_key_path,gim_server_host,local_ip,install_dir,perl_path,shared_secret,failover_gim_server_host,auto_assign_ip,check_8443,allow_tls_fallback,gim_ca_file,gim_key_file,gim_cert_file,gim_kit_version
