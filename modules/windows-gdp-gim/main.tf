@@ -182,7 +182,7 @@ if ($isWindows) {
 }
 
 # Execute PowerShell script with execution policy bypass
-& $psExe -ExecutionPolicy Bypass -File "${path.module}/scripts/windows/install_gim_windows.ps1" `
+& $psExe -ExecutionPolicy Bypass -File "${path.module}/../../scripts/windows/install_gim_windows.ps1" `
   -HostName "${each.value.host}" `
   -Port "${each.value.mgmt_port}" `
   -Username "${each.value.username}" `
