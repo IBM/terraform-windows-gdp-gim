@@ -58,7 +58,7 @@ If you used the test script, the files are already local at `scripts/windows/tes
 
 Use the **20-column** format and set the last three columns for the server(s) that should use custom TLS.
 
-1. Open `examples/basic/inventory/servers.csv`.
+1. Open `examples/windows-gdp-gim/inventory/servers.csv`.
 2. Add the three headers if missing (they must be the last three columns):
    `gim_ca_file`, `gim_key_file`, `gim_cert_file`
 3. For each server that uses custom certs, set the paths **as they are on the Terraform runner** (not the target). Use the same path style (e.g. backslashes). You can quote paths that contain spaces or backslashes.
@@ -83,7 +83,7 @@ win-2025a,windows,win-2025a.dev.fyre.ibm.com,5986,Administrator,Welcome2Guardium
 From the example directory:
 
 ```bash
-cd examples/basic
+cd examples/windows-gdp-gim
 terraform init
 terraform plan
 terraform apply
