@@ -13,7 +13,7 @@ This module is compatible with the Terraform Registry (both public and private).
 - `.gitignore` - Excludes sensitive files
 
 ✅ **Examples**
-- `examples/basic/` - Complete working example
+- `examples/windows-gdp-gim/` - Complete working example
 
 ✅ **Documentation**
 - Comprehensive README.md with:

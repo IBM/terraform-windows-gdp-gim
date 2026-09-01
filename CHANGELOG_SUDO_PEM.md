@@ -9,7 +9,7 @@ Added support for:
 
 ## Changes Made
 
-### 1. Updated `examples/basic/inventory/servers.csv`
+### 1. Updated `examples/windows-gdp-gim/inventory/servers.csv`
 
 Added two new columns:
 - `use_sudo`: Set to `true` if user needs sudo, `false` or empty for root
@@ -21,7 +21,7 @@ name,os,host,mgmt_port,username,password,use_sudo,pem_key_path,...
 server1,linux,server1.example.com,22,admin,,true,/path/to/key.pem,...
 ```
 
-### 2. Updated `examples/basic/main.tf`
+### 2. Updated `examples/windows-gdp-gim/main.tf`
 
 - Added `use_sudo` and `pem_key_path` to triggers
 - Updated script call to pass `--use-sudo` and `--pem-key` parameters

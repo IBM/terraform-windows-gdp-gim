@@ -106,7 +106,7 @@ windows_deployment_method = "winrm"  # Default
    # Copy public key to Windows host
    type $env:USERPROFILE\.ssh\id_rsa.pub | ssh Administrator@hostname "powershell -Command `"New-Item -ItemType Directory -Force -Path `$env:USERPROFILE\.ssh | Out-Null; Add-Content -Path `$env:USERPROFILE\.ssh\authorized_keys -Value (Get-Content stdin)`""
    
-   # Update Terraform to use SSH key (modify examples/basic/main.tf provisioner)
+   # Update Terraform to use SSH key (modify examples/windows-gdp-gim/main.tf provisioner)
    # Add: -SshKeyPath "$env:USERPROFILE\.ssh\id_rsa"
    ```
 
@@ -211,11 +211,11 @@ ssh-copy-id Administrator@hostname
 
 ### "bash not found" (when using SSH mode on Windows)
 
-**Solution:** This error should no longer occur with the PowerShell SSH script. If you see it, ensure you're using the updated `examples/basic/main.tf` that uses `install_gim_windows_ssh.ps1`.
+**Solution:** This error should no longer occur with the PowerShell SSH script. If you see it, ensure you're using the updated `examples/windows-gdp-gim/main.tf` that uses `install_gim_windows_ssh.ps1`.
 
 ## Quick Start: Use SMB Mode (No SSH/WinRM Required) ⭐
 
-1. Edit `examples/basic/terraform.tfvars`:
+1. Edit `examples/windows-gdp-gim/terraform.tfvars`:
    ```hcl
    windows_deployment_method = "smb"
    ```
@@ -244,7 +244,7 @@ The SMB script will:
 
 If you prefer SSH mode:
 
-1. Edit `examples/basic/terraform.tfvars`:
+1. Edit `examples/windows-gdp-gim/terraform.tfvars`:
    ```hcl
    windows_deployment_method = "ssh"
    ```

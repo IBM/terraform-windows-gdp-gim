@@ -22,10 +22,10 @@ This Terraform module automates the deployment of IBM Guardium GIM agents across
 
 ### Quick guidance (minimal steps)
 
-1. **Prepare installer** – Place the IBM GIM Windows package under `examples/basic/packages/windows/` (e.g. `Guardium_12.2.1.205_GIM_Windows` with `GIM-Installer-*/Setup.exe` inside).
-2. **Inventory** – Copy `examples/basic/inventory/servers.csv.example` to `servers.csv` and set `host`, `username`, `password`, and `gim_server_host` (and optionally `failover_gim_server_host`) per server. Lines starting with `#` are ignored.
-3. **Terraform vars** – Edit `examples/basic/terraform.tfvars`: set `servers_csv_path`, `windows_gim_packages_base_dir` (or set `gim_kit_version` per server in `servers.csv`), and `windows_deployment_method` (e.g. `"smb"`). Ports and Guardium host come from tfvars (ports) and CSV (Guardium/failover per server).
-4. **Run** – From `examples/basic`: `terraform init` then `terraform apply`.
+1. **Prepare installer** – Place the IBM GIM Windows package under `examples/windows-gdp-gim/packages/windows/` (e.g. `Guardium_12.2.1.205_GIM_Windows` with `GIM-Installer-*/Setup.exe` inside).
+2. **Inventory** – Copy `examples/windows-gdp-gim/inventory/servers.csv.example` to `servers.csv` and set `host`, `username`, `password`, and `gim_server_host` (and optionally `failover_gim_server_host`) per server. Lines starting with `#` are ignored.
+3. **Terraform vars** – Edit `examples/windows-gdp-gim/terraform.tfvars`: set `servers_csv_path`, `windows_gim_packages_base_dir` (or set `gim_kit_version` per server in `servers.csv`), and `windows_deployment_method` (e.g. `"smb"`). Ports and Guardium host come from tfvars (ports) and CSV (Guardium/failover per server).
+4. **Run** – From `examples/windows-gdp-gim`: `terraform init` then `terraform apply`.
 
 ### What Gets Installed
 
@@ -344,7 +344,7 @@ Or download and extract the ZIP file to your desired location.
 Place your IBM Guardium Windows installer package in the following directory structure:
 
 ```
-examples/basic/packages/windows/
+examples/windows-gdp-gim/packages/windows/
 └── Guardium_12.2.1.205_GIM_Windows/
     └── GIM-Installer-12.2_r120201205_1/
         └── Setup.exe
@@ -356,7 +356,7 @@ examples/basic/packages/windows/
 
 ### Step 4: Configure Server Inventory (servers.csv)
 
-Create or edit `examples/basic/inventory/servers.csv` with your Windows servers. See [Understanding servers.csv](#understanding-serverscsv) below for detailed explanation.
+Create or edit `examples/windows-gdp-gim/inventory/servers.csv` with your Windows servers. See [Understanding servers.csv](#understanding-serverscsv) below for detailed explanation.
 
 **Note:** Ports (`gim_server_port`, `listener_port`) are configured in `terraform.tfvars` (see Step 5), not in the CSV.
 
@@ -369,14 +369,14 @@ server2,windows,server2.example.com,5986,Administrator,MyPassword456,FALSE,,10.8
 
 **Copy the example file:**
 ```bash
-cd examples/basic/inventory
+cd examples/windows-gdp-gim/inventory
 cp servers.csv.example servers.csv
 # Edit servers.csv with your server details
 ```
 
 ### Step 5: Configure Terraform Variables
 
-Edit `examples/basic/terraform.tfvars`:
+Edit `examples/windows-gdp-gim/terraform.tfvars`:
 
 ```hcl
 servers_csv_path = "./inventory/servers.csv"
@@ -390,7 +390,7 @@ Guardium central manager and failover are set per server in `servers.csv` (`gim_
 
 **Copy the example file:**
 ```bash
-cd examples/basic
+cd examples/windows-gdp-gim
 cp terraform.tfvars.example terraform.tfvars
 # Edit terraform.tfvars with your configuration
 ```
@@ -398,7 +398,7 @@ cp terraform.tfvars.example terraform.tfvars
 ### Step 6: Initialize Terraform
 
 ```bash
-cd examples/basic
+cd examples/windows-gdp-gim
 terraform init
 ```
 
@@ -420,7 +420,7 @@ Terraform has been successfully initialized!
 Before deploying, review what Terraform will do:
 
 ```bash
-cd examples/basic
+cd examples/windows-gdp-gim
 terraform plan
 ```
 
@@ -524,7 +524,7 @@ The `servers.csv` file is the **inventory file** that defines all Windows server
 ### File Location
 
 ```
-examples/basic/inventory/servers.csv
+examples/windows-gdp-gim/inventory/servers.csv
 ```
 
 ### File Format
@@ -607,7 +607,7 @@ server1,windows,server1.example.com,5986,Administrator,Password123,FALSE,,10.80.
 ```
 
 #### Custom ports (in terraform.tfvars, not CSV)
-Set in `examples/basic/terraform.tfvars`:
+Set in `examples/windows-gdp-gim/terraform.tfvars`:
 ```hcl
 gim_server_port = 8446   # Guardium management port (default)
 listener_port   = true   # Use GIM listener port 8445; set false to omit
@@ -753,7 +753,7 @@ Guardium central manager and failover are set **per server in `servers.csv`** (`
 
 **Note:** Ports are in `terraform.tfvars`. All per-server settings (`gim_server_host`, `failover_gim_server_host`, `install_dir`, etc.) are in `servers.csv`. See [Understanding servers.csv](#understanding-serverscsv).
 
-**Inventory:** All server settings (including `gim_server_host` and `failover_gim_server_host`) come from `servers.csv`. See [Understanding servers.csv](#understanding-serverscsv) for column reference and examples. Copy `examples/basic/inventory/servers.csv.example` to `servers.csv` and edit.
+**Inventory:** All server settings (including `gim_server_host` and `failover_gim_server_host`) come from `servers.csv`. See [Understanding servers.csv](#understanding-serverscsv) for column reference and examples. Copy `examples/windows-gdp-gim/inventory/servers.csv.example` to `servers.csv` and edit.
 
 ### Windows Deployment Methods
 
@@ -837,7 +837,7 @@ New-NetFirewallRule -Name sshd -DisplayName 'OpenSSH Server (sshd)' -Enabled Tru
 ### Basic Installation (All Servers)
 
 ```bash
-cd examples/basic
+cd examples/windows-gdp-gim
 terraform init
 terraform plan    # Review what will be deployed
 terraform apply   # Deploy to all servers in servers.csv
@@ -1236,7 +1236,7 @@ terraform state list
    - Use `.gitignore` to exclude `terraform.tfvars` and `servers.csv`
    - Use environment variables or secret management tools
 
-2. **Passwords are currently required:** `password` in `servers.csv` is a mandatory column, and it's passed through to (and logged as "set", never in plaintext, by) whichever deployment script runs. The `pem_key_path` CSV column exists for schema compatibility only - the underlying SSH script (`install_gim_windows_ssh.ps1`) has an `-SshKeyPath` parameter for key-based auth, but `examples/basic/main.tf` doesn't currently wire `pem_key_path` through to it, so key-based auth isn't available end-to-end yet.
+2. **Passwords are currently required:** `password` in `servers.csv` is a mandatory column, and it's passed through to (and logged as "set", never in plaintext, by) whichever deployment script runs. The `pem_key_path` CSV column exists for schema compatibility only - the underlying SSH script (`install_gim_windows_ssh.ps1`) has an `-SshKeyPath` parameter for key-based auth, but `examples/windows-gdp-gim/main.tf` doesn't currently wire `pem_key_path` through to it, so key-based auth isn't available end-to-end yet.
 
 3. **Protect log files:**
    - Logs contain passwords and sensitive information
@@ -1291,7 +1291,7 @@ Or set `skip_if_already_installed = false` to always (re)run the installer for e
 ```
 terraform-guardium-gim/
 ├── README.md                    # This file
-├── main.tf                       # Root-level generic module (not used by examples/basic; see note below)
+├── main.tf                       # Root-level generic module (not used by examples/windows-gdp-gim; see note below)
 ├── variables.tf
 ├── outputs.tf
 ├── scripts/
@@ -1316,7 +1316,7 @@ terraform-guardium-gim/
         └── logs/                 # Per-host logs, central-summary.csv, and collected remote GIM logs (generated)
 ```
 
-**Note:** The root `main.tf`/`variables.tf`/`outputs.tf` are a separate, generic module skeleton (kept for Terraform Registry structure - see `REGISTRY.md`); `examples/basic/main.tf` does not call it as a module and has its own complete, actively-maintained implementation. When following this README, all paths and commands refer to `examples/basic/`.
+**Note:** The root `main.tf`/`variables.tf`/`outputs.tf` are a separate, generic module skeleton (kept for Terraform Registry structure - see `REGISTRY.md`); `examples/windows-gdp-gim/main.tf` does not call it as a module and has its own complete, actively-maintained implementation. When following this README, all paths and commands refer to `examples/windows-gdp-gim/`.
 
 ## Support and Contributing
 
