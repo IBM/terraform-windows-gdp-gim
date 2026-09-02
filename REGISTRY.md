@@ -29,7 +29,7 @@ This module is compatible with the Terraform Registry (both public and private).
 
 **Requirements:**
 1. GitHub repository (public)
-2. Repository name format: `terraform-<PROVIDER>-<NAME>` (e.g., `terraform-guardium-gim`)
+2. Repository name format: `terraform-<PROVIDER>-<NAME>` (e.g., `terraform-windows-gdp-gim`)
 3. Version tags: `v1.0.0`, `v1.1.0`, etc.
 4. LICENSE file (MIT, Apache 2.0, or MPL 2.0)
 5. README.md in root
@@ -49,7 +49,7 @@ This module is compatible with the Terraform Registry (both public and private).
 - ✅ Module structure: Compatible
 - ✅ README.md: Complete
 - ✅ LICENSE: MIT License added
-- ⚠️ Repository naming: May need to rename to `terraform-guardium-gim`
+- ⚠️ Repository naming: May need to rename to `terraform-windows-gdp-gim`
 - ⚠️ Version tags: Need to create git tags for releases
 
 ### Private Terraform Registry
@@ -98,7 +98,7 @@ module "guardium_gim" {
 
 ```hcl
 module "guardium_gim" {
-  source = "git::https://github.com/your-org/terraform-guardium-gim.git?ref=v1.0.0"
+  source = "git::https://github.com/your-org/terraform-windows-gdp-gim.git?ref=v1.0.0"
 
   inventory_csv_path = "./inventory/servers.csv"
   gim_server         = "9.80.59.143"
@@ -129,18 +129,17 @@ git push origin v1.0.0
 The current structure works for registry publication:
 
 ```
-terraform-guardium-gim/
+terraform-windows-gdp-gim/
 ├── README.md          # Required - comprehensive documentation
 ├── LICENSE            # Required - MIT License
 ├── .gitignore         # Recommended
-├── main.tf            # Required - module logic
-├── variables.tf       # Required - variable definitions
-├── outputs.tf         # Required - output definitions
 ├── scripts/           # Module scripts
 │   ├── unix/
 │   └── windows/
 └── examples/          # Recommended - usage examples
-    └── basic/
+    └── windows-gdp-gim/
+        ├── main.tf       # Required - module logic
+        ├── variables.tf  # Required - variable definitions
 ```
 
 ## Notes
