@@ -334,7 +334,7 @@ terraform version
 
 ```bash
 git clone <repository-url>
-cd terraform-guardium-gim
+cd terraform-windows-gdp-gim
 ```
 
 Or download and extract the ZIP file to your desired location.
@@ -585,9 +585,9 @@ The CSV file uses standard CSV format:
 
 ```csv
 name,os,host,mgmt_port,username,password,use_sudo,pem_key_path,gim_server_host,local_ip,install_dir,perl_path,shared_secret,failover_gim_server_host,auto_assign_ip,check_8443,allow_tls_fallback,gim_ca_file,gim_key_file,gim_cert_file,gim_kit_version
-win2019a,windows,win2019a.dev.company.com,5986,Administrator,MyPassword!234,FALSE,,10.80.59.145,10.60.250.172,,,,107.22.123.11,0,TRUE,FALSE,C:\Users\Administrator\gim_0802\terraform-guardium-gim\examples\basic\gim-certs\SKgim_ca.pem,C:\Users\Administrator\gim_0802\terraform-guardium-gim\examples\basic\gim-certs\SKgimListenerServer.key.pem,C:\Users\Administrator\gim_0802\terraform-guardium-gim\examples\basic\gim-certs\SKgimListenerServer.cert.pem,12.2.1.205
-win2025a,windows,win2025a.dev.company.com,5986,Administrator,MyPassword!234,FALSE,,10.80.59.145,10.60.254.223,,,,107.22.123.11,0,TRUE,FALSE,C:\Users\Administrator\gim_0802\terraform-guardium-gim\examples\basic\gim-certs\SKgim_ca.pem,C:\Users\Administrator\gim_0802\terraform-guardium-gim\examples\basic\gim-certs\SKgimListenerServer.key.pem,C:\Users\Administrator\gim_0802\terraform-guardium-gim\examples\basic\gim-certs\SKgimListenerServer.cert.pem,12.2.1.205
-win2022a,windows,win2022a.dev.company.com,5986,Administrator,MyPassword!234,FALSE,,10.80.59.145,10.30.234.196,,,,107.22.123.11,0,TRUE,FALSE,C:\Users\Administrator\gim_0802\terraform-guardium-gim\examples\basic\gim-certs\SKgim_ca.pem,C:\Users\Administrator\gim_0802\terraform-guardium-gim\examples\basic\gim-certs\SKgimListenerServer.key.pem,C:\Users\Administrator\gim_0802\terraform-guardium-gim\examples\basic\gim-certs\SKgimListenerServer.cert.pem,12.2.2.259
+win2019a,windows,win2019a.dev.company.com,5986,Administrator,MyPassword!234,FALSE,,10.80.59.145,10.60.250.172,,,,107.22.123.11,0,TRUE,FALSE,C:\Users\Administrator\gim_0802\terraform-windows-gdp-gim\examples\windows-gdp-gim\gim-certs\SKgim_ca.pem,C:\Users\Administrator\gim_0802\terraform-windows-gdp-gim\examples\windows-gdp-gim\gim-certs\SKgimListenerServer.key.pem,C:\Users\Administrator\gim_0802\terraform-windows-gdp-gim\examples\windows-gdp-gim\gim-certs\SKgimListenerServer.cert.pem,12.2.1.205
+win2025a,windows,win2025a.dev.company.com,5986,Administrator,MyPassword!234,FALSE,,10.80.59.145,10.60.254.223,,,,107.22.123.11,0,TRUE,FALSE,C:\Users\Administrator\gim_0802\terraform-windows-gdp-gim\examples\windows-gdp-gim\gim-certs\SKgim_ca.pem,C:\Users\Administrator\gim_0802\terraform-windows-gdp-gim\examples\windows-gdp-gim\gim-certs\SKgimListenerServer.key.pem,C:\Users\Administrator\gim_0802\terraform-windows-gdp-gim\examples\windows-gdp-gim\gim-certs\SKgimListenerServer.cert.pem,12.2.1.205
+win2022a,windows,win2022a.dev.company.com,5986,Administrator,MyPassword!234,FALSE,,10.80.59.145,10.30.234.196,,,,107.22.123.11,0,TRUE,FALSE,C:\Users\Administrator\gim_0802\terraform-windows-gdp-gim\examples\windows-gdp-gim\gim-certs\SKgim_ca.pem,C:\Users\Administrator\gim_0802\terraform-windows-gdp-gim\examples\windows-gdp-gim\gim-certs\SKgimListenerServer.key.pem,C:\Users\Administrator\gim_0802\terraform-windows-gdp-gim\examples\windows-gdp-gim\gim-certs\SKgimListenerServer.cert.pem,12.2.2.259
 
 ```
 
@@ -1289,11 +1289,8 @@ Or set `skip_if_already_installed = false` to always (re)run the installer for e
 ## File Structure
 
 ```
-terraform-guardium-gim/
+terraform-windows-gdp-gim/
 ├── README.md                    # This file
-├── main.tf                       # Root-level generic module (not used by examples/windows-gdp-gim; see note below)
-├── variables.tf
-├── outputs.tf
 ├── scripts/
 │   └── windows/
 │       ├── install_gim_windows.ps1       # WinRM deployment (install/uninstall)
@@ -1302,7 +1299,7 @@ terraform-guardium-gim/
 │       ├── install_gim_windows_ssh.sh    # Legacy bash SSH variant, not invoked by any .tf file
 │       └── generate_test_certs.sh        # Helper for generating test TLS certs (see docs/TESTING_WITH_CERT.md)
 └── examples/
-    └── basic/                    # Self-contained working example - this is what you actually run
+    └── windows-gdp-gim/                    # Self-contained working example - this is what you actually run
         ├── main.tf               # Real deployment logic: CSV parsing, installer resolution, install/uninstall provisioners
         ├── variables.tf
         ├── terraform.tfvars      # Your configuration (gitignored)
